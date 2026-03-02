@@ -154,7 +154,7 @@ function App(){
   const runAI=async(ad,tab)=>{
     const k=ad.adId+"_"+tab;if(aiRes[k])return;setAiLoad(true);setAiTab(tab);
     try{
-      const r=await fetch(AI_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({adId:ad.adId,tab:tab})});
+      const ac=new AbortController();setTimeout(()=>ac.abort(),120000);const r=await fetch(AI_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({adId:ad.adId,tab:tab}),signal
       const d=await r.json();
       const isVid=!!ad.videoUrl;
       const obj=ad.compras>0?"ventas":"mensajes";
